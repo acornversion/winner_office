@@ -219,7 +219,7 @@ class _HomeState extends State<Home> {
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.only(
-                                                    right: 5, left: 0),
+                                                    right: 0, left: 0),
                                                 child: Text(
                                                   'More',
                                                   style: TextStyle(

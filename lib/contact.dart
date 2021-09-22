@@ -27,8 +27,13 @@ class Contact extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(top: 10),
               child: TextButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    )),
+                  ),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -68,9 +73,20 @@ class Contact extends StatelessWidget {
                       ]),
                   onPressed: () => {}),
             ),
-            Divider(),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Divider(
+                height: 0,
+              ),
+            ),
             Container(
               child: TextButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    )),
+                  ),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -110,7 +126,12 @@ class Contact extends StatelessWidget {
                       ]),
                   onPressed: () => {}),
             ),
-            Divider(),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Divider(
+                height: 0,
+              ),
+            ),
             Container(
               padding: EdgeInsets.only(top: 10, bottom: 15),
               child: Row(

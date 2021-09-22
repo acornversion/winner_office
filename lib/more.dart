@@ -405,17 +405,45 @@ Widget widgetRowItems(context, items) {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.settings_voice_outlined,
-                    color: Color(0xff90A4AE),
-                    size: 30,
-                  ),
                   Container(
-                      child: Icon(
-                    Icons.grid_view_outlined,
-                    color: Color(0xff90A4AE),
-                    size: 30,
-                  )),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            color: Color(0xff90A4AE), // Set border color
+                            width: 2.0), // Set border width
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(50)), // Set rounded corner radius
+                      ),
+                      child: Container(
+                          padding: EdgeInsets.all(3),
+                          child: Center(
+                            child: Icon(
+                              Icons.settings_voice_outlined,
+                              color: Color(0xff90A4AE),
+                              size: 20,
+                            ),
+                          ))),
+                  Container(
+                    margin: EdgeInsets.only(left: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                          color: Color(0xff90A4AE), // Set border color
+                          width: 2.0), // Set border width
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(50)), // Set rounded corner radius
+                    ),
+                    child: Container(
+                        child: Container(
+                            padding: EdgeInsets.all(3),
+                            child: Center(
+                              child: Icon(
+                                Icons.grid_view_outlined,
+                                color: Color(0xff90A4AE),
+                                size: 20,
+                              ),
+                            ))),
+                  ),
                 ],
               )
             ],
@@ -424,18 +452,44 @@ Widget widgetRowItems(context, items) {
         child: Row(
           children: [
             items['status'] == 'lock'
-                ? Center(
-                    child: Icon(
-                    Icons.lock_outlined,
-                    color: Color(0xff90A4AE),
-                    size: 30,
-                  ))
-                : Center(
-                    child: Icon(
-                    Icons.arrow_right_alt_outlined,
-                    color: Color(0xff01579B),
-                    size: 30,
-                  ))
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                          color: items['status'] == 'lock'
+                              ? Color(0xff90A4AE)
+                              : Color(0xff01579B), // Set border color
+                          width: 2.5), // Set border width
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(50)), // Set rounded corner radius
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.all(3),
+                        child: Center(
+                            child: Icon(
+                          Icons.lock_outlined,
+                          color: Color(0xff90A4AE),
+                          size: 20,
+                        ))))
+                : Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                          color: items['status'] == 'lock'
+                              ? Color(0xff90A4AE)
+                              : Color(0xff01579B), // Set border color
+                          width: 2.5), // Set border width
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(50)), // Set rounded corner radius
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.all(3),
+                        child: Center(
+                            child: Icon(
+                          Icons.arrow_forward_outlined,
+                          color: Color(0xff01579B),
+                          size: 20,
+                        ))))
           ],
         ),
       ),
