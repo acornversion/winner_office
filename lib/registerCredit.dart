@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'dateWidget.dart';
 
 class RegisterCard extends StatelessWidget {
   RegisterCard({
@@ -91,7 +91,7 @@ class RegisterCard extends StatelessWidget {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                      padding: EdgeInsets.only(top: 10, bottom: 0),
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Card number',
@@ -104,15 +104,10 @@ class RegisterCard extends StatelessWidget {
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Expiry date (MM/YY)',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                        ),
-                        initialValue: '',
+                      padding: EdgeInsets.only(top: 0, bottom: 10),
+                      child: DatePickerWidget(
+                        labelText: 'Expiry date (MM/YY)',
+                        pickerType: 'credit',
                       ),
                     ),
                     Container(

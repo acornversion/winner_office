@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dateWidget.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({
@@ -213,7 +214,7 @@ class _FormPageState extends State<FormPage> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        padding: EdgeInsets.only(top: 10, bottom: 0),
                         child: TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Surname',
@@ -226,15 +227,10 @@ class _FormPageState extends State<FormPage> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Date of birth (DD/MM/YYYY)',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
-                          initialValue: '',
+                        padding: EdgeInsets.only(top: 0, bottom: 10),
+                        child: DatePickerWidget(
+                          labelText: 'Date of birth (DD/MM/YYYY)',
+                          pickerType: 'regis',
                         ),
                       ),
                       Container(

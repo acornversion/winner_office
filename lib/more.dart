@@ -358,6 +358,7 @@ Widget widgetAddCredit(context) {
           });
 }
 
+// ส่วน icon
 Widget widgetRowItems(context, items) {
   return Center(
       child: Row(
@@ -371,128 +372,138 @@ Widget widgetRowItems(context, items) {
           fit: BoxFit.cover,
         ),
       ),
-      Container(
-          padding: EdgeInsets.all(10),
-          width: MediaQuery.of(context).size.width - 190,
-          child: Column(
+      Column(
+        children: [
+          Row(
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 15),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width - 210,
-                          child: Text(
-                            items['titleEng'],
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width - 210,
-                          child: Text(
-                            items['titleTh'],
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.start,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Color(0xff90A4AE), // Set border color
-                            width: 2.0), // Set border width
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(50)), // Set rounded corner radius
+              Padding(
+                padding: EdgeInsets.only(bottom: 15),
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 210,
+                      child: Text(
+                        items['titleEng'],
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.start,
                       ),
-                      child: Container(
-                          padding: EdgeInsets.all(3),
-                          child: Center(
-                            child: Icon(
-                              Icons.settings_voice_outlined,
-                              color: Color(0xff90A4AE),
-                              size: 20,
-                            ),
-                          ))),
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color(0xff90A4AE), // Set border color
-                          width: 2.0), // Set border width
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(50)), // Set rounded corner radius
                     ),
-                    child: Container(
-                        child: Container(
-                            padding: EdgeInsets.all(3),
-                            child: Center(
-                              child: Icon(
-                                Icons.grid_view_outlined,
-                                color: Color(0xff90A4AE),
-                                size: 20,
-                              ),
-                            ))),
-                  ),
-                ],
+                    Container(
+                      width: MediaQuery.of(context).size.width - 210,
+                      child: Text(
+                        items['titleTh'],
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.start,
+                      ),
+                    )
+                  ],
+                ),
               )
             ],
-          )),
-      Container(
-        child: Row(
-          children: [
-            items['status'] == 'lock'
-                ? Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: items['status'] == 'lock'
-                              ? Color(0xff90A4AE)
-                              : Color(0xff01579B), // Set border color
-                          width: 2.5), // Set border width
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(50)), // Set rounded corner radius
-                    ),
-                    child: Container(
-                        padding: EdgeInsets.all(3),
-                        child: Center(
-                            child: Icon(
-                          Icons.lock_outlined,
-                          color: Color(0xff90A4AE),
-                          size: 20,
-                        ))))
-                : Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: items['status'] == 'lock'
-                              ? Color(0xff90A4AE)
-                              : Color(0xff01579B), // Set border color
-                          width: 2.5), // Set border width
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(50)), // Set rounded corner radius
-                    ),
-                    child: Container(
-                        padding: EdgeInsets.all(3),
-                        child: Center(
-                            child: Icon(
-                          Icons.arrow_forward_outlined,
-                          color: Color(0xff01579B),
-                          size: 20,
-                        ))))
-          ],
-        ),
+          ),
+          iconvoiceAndiconview(context, items),
+        ],
       ),
+      iconLock(items),
     ],
   ));
+}
+
+// icon คู่
+Widget iconvoiceAndiconview(context, items) {
+  return Container(
+      padding: EdgeInsets.all(10),
+      width: MediaQuery.of(context).size.width - 190,
+      child: Row(
+        children: [
+          Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                    color: Color(0xff90A4AE), // Set border color
+                    width: 2.0), // Set border width
+                borderRadius: BorderRadius.all(
+                    Radius.circular(50)), // Set rounded corner radius
+              ),
+              child: Container(
+                  padding: EdgeInsets.all(3),
+                  child: Center(
+                    child: Icon(
+                      Icons.settings_voice_outlined,
+                      color: Color(0xff90A4AE),
+                      size: 20,
+                    ),
+                  ))),
+          Container(
+            margin: EdgeInsets.only(left: 5),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                  color: Color(0xff90A4AE), // Set border color
+                  width: 2.0), // Set border width
+              borderRadius: BorderRadius.all(
+                  Radius.circular(50)), // Set rounded corner radius
+            ),
+            child: Container(
+                child: Container(
+                    padding: EdgeInsets.all(3),
+                    child: Center(
+                      child: Icon(
+                        Icons.grid_view_outlined,
+                        color: Color(0xff90A4AE),
+                        size: 20,
+                      ),
+                    ))),
+          ),
+        ],
+      ));
+}
+
+// ส่วน arrow และ lock
+Widget iconLock(items) {
+  return Container(
+    child: Row(
+      children: [
+        items['status'] == 'lock'
+            ? Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                      color: items['status'] == 'lock'
+                          ? Color(0xff90A4AE)
+                          : Color(0xff01579B), // Set border color
+                      width: 2.5), // Set border width
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(50)), // Set rounded corner radius
+                ),
+                child: Container(
+                    padding: EdgeInsets.all(3),
+                    child: Center(
+                        child: Icon(
+                      Icons.lock_outlined,
+                      color: Color(0xff90A4AE),
+                      size: 20,
+                    ))))
+            : Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                      color: items['status'] == 'lock'
+                          ? Color(0xff90A4AE)
+                          : Color(0xff01579B), // Set border color
+                      width: 2.5), // Set border width
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(50)), // Set rounded corner radius
+                ),
+                child: Container(
+                    padding: EdgeInsets.all(3),
+                    child: Center(
+                        child: Icon(
+                      Icons.arrow_forward_outlined,
+                      color: Color(0xff01579B),
+                      size: 20,
+                    ))))
+      ],
+    ),
+  );
 }
