@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(320, 45),
-                      primary: Colors.amber[700],
+                      primary: Color(0xffFFAB40),
                       onPrimary: Colors.black,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -246,7 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               minimumSize: Size(80, 45),
-                              primary: Colors.amber[800],
+                              primary: Color(0xffFFAB40),
                               side: BorderSide(
                                   color: Colors.amber.shade800, width: 1),
                               shape: RoundedRectangleBorder(

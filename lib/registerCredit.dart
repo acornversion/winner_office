@@ -1,11 +1,16 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'dateWidget.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegisterCard extends StatelessWidget {
   RegisterCard({
     required this.title,
   });
   final title;
+  var maskFormatter = new MaskTextInputFormatter(
+      mask: '#### #### #### ####', filter: {"#": RegExp(r'[0-9]')});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,6 +44,7 @@ class RegisterCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.only(bottom: 10),
                       child: TextFormField(
+                        autofocus: true,
                         decoration: InputDecoration(
                           labelText: 'Name on card',
                           border: OutlineInputBorder(
@@ -93,6 +99,8 @@ class RegisterCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.only(top: 10, bottom: 0),
                       child: TextFormField(
+                        inputFormatters: [maskFormatter],
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'Card number',
                           border: OutlineInputBorder(
@@ -114,7 +122,53 @@ class RegisterCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.only(top: 10, bottom: 10),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
+                          suffixIcon: TextButton(
+                            style: TextButton.styleFrom(
+                              minimumSize: Size(50, 45),
+                              primary: Color(0xff909090),
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                              ),
+                            ),
+                            onPressed: () => showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                // title: const Text('Choose an account'),
+                                content: Image.asset(
+                                  'assets/images/credit.png',
+                                  fit: BoxFit.fill,
+                                ),
+                                actions: <Widget>[
+                                  Container(
+                                      child: Center(
+                                    child: Container(
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            minimumSize: Size(80, 35),
+                                            primary: Colors.amber[700],
+                                            onPrimary: Colors.black,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30)),
+                                            ),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text(
+                                            'OK',
+                                          )),
+                                    ),
+                                  ))
+                                ],
+                              ),
+                            ),
+                            child: Icon(
+                              Icons.help_outlined,
+                            ),
+                          ),
                           labelText: 'Security code',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
@@ -127,6 +181,7 @@ class RegisterCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.only(top: 10, bottom: 10),
                       child: TextFormField(
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           labelText: 'ZIP/Postal code',
                           border: OutlineInputBorder(

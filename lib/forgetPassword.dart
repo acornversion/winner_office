@@ -49,6 +49,7 @@ class ForgetPassword extends StatelessWidget {
                 width: 320,
                 padding: EdgeInsets.only(top: 10, bottom: 10),
                 child: TextFormField(
+                  autofocus: true,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(

@@ -203,6 +203,7 @@ class _FormPageState extends State<FormPage> {
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(bottom: 10),
                         child: TextFormField(
+                          autofocus: true,
                           decoration: InputDecoration(
                             labelText: 'Given name',
                             border: OutlineInputBorder(

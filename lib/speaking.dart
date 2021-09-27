@@ -9,7 +9,7 @@ class Speaking extends StatefulWidget {
 
 class _SpeakingState extends State<Speaking> {
   int counter = 0;
-  List<dynamic> answerList = [
+  List<dynamic> chatList = [
     {
       'questionEng': 'What time do you normally get up?',
       'questionTh': 'ปกติคุณตื่นนอนกี่โมง',
@@ -76,7 +76,7 @@ class _SpeakingState extends State<Speaking> {
                 children: [
                   Expanded(
                       child: new ListView.builder(
-                          itemCount: answerList.length,
+                          itemCount: chatList.length,
                           itemBuilder: (BuildContext ctxt, int Index) {
                             return Column(
                               children: [if (Index == 0) question()],
@@ -219,7 +219,7 @@ class _SpeakingState extends State<Speaking> {
                                           ),
                                           onPressed: () {
                                             setState(() {
-                                              answerList = [];
+                                              chatList = [];
                                               next = false;
                                             });
                                           },
@@ -300,201 +300,186 @@ class _SpeakingState extends State<Speaking> {
   }
 
   Widget question() {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (var items in answerList)
-              Column(
-                children: [
-                  if (items['type'] == 'chatbot')
-                    Container(
-                      child: Row(
+        for (var items in chatList)
+          Column(
+            children: [
+              if (items['type'] == 'chatbot')
+                Container(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        children: [
+                          Container(
+                            padding:
+                                EdgeInsets.only(top: 15, right: 8, left: 8),
+                            child: Icon(
+                              Icons.account_circle_outlined,
+                              size: 40,
+                              color: Color(0xFFAAAAAA),
+                            ),
+                          )
+                        ],
+                      ),
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
+                          Container(
+                              width: 270,
+                              margin: EdgeInsets.only(top: 15),
+                              padding: EdgeInsets.all(15),
+                              decoration: const BoxDecoration(
+                                color: Color(0xff01579B),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(25),
+                                  bottomLeft: Radius.circular(25),
+                                  bottomRight: Radius.circular(25),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    items['questionEng'],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    items['questionTh'],
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Container(
+                            child: Row(
+                              children: [
+                                Container(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(30, 30),
+                                        primary: Color(0xFF01579B),
+                                        onPrimary: Colors.white,
+                                        shape: CircleBorder(),
+                                        padding: EdgeInsets.all(0)),
+                                    onPressed: () {},
+                                    child: Icon(
+                                      Icons.volume_up_outlined,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(30, 30),
+                                        primary: Color(0xFF01579B),
+                                        onPrimary: Colors.white,
+                                        shape: CircleBorder(),
+                                        padding: EdgeInsets.all(0)),
+                                    onPressed: () {},
+                                    child: Icon(
+                                      Icons.record_voice_over_outlined,
+                                      size: 20,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              if (items['type'] == 'user')
+                Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                            width: 270,
+                            margin:
+                                EdgeInsets.only(top: 15, right: 15, left: 15),
+                            padding: EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                              color: Color(0xffE0E0E0),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(25),
+                                topRight: Radius.circular(5),
+                                bottomLeft: Radius.circular(25),
+                                bottomRight: Radius.circular(25),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                    child: Column(
+                                  children: [
+                                    Text(
+                                      items['questionEng'],
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      items['questionTh'],
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                              ],
+                            )),
+                        Container(
+                          padding: EdgeInsets.only(right: 15, left: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
-                                padding:
-                                    EdgeInsets.only(top: 15, right: 8, left: 8),
-                                child: Icon(
-                                  Icons.account_circle_outlined,
-                                  size: 40,
-                                  color: Color(0xFFAAAAAA),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(30, 30),
+                                      primary: Color(0xFFE0E0E0),
+                                      onPrimary: Color(0xff01579B),
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(0)),
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.volume_up_outlined,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(30, 30),
+                                      primary: Color(0xFFE0E0E0),
+                                      onPrimary: Color(0xff01579B),
+                                      shape: CircleBorder(),
+                                      padding: EdgeInsets.all(0)),
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.record_voice_over_outlined,
+                                    size: 20,
+                                  ),
                                 ),
                               )
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  width: 270,
-                                  margin: EdgeInsets.only(top: 15),
-                                  padding: EdgeInsets.all(15),
-                                  decoration: const BoxDecoration(
-                                    color: Color(0xff01579B),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(5),
-                                      topRight: Radius.circular(25),
-                                      bottomLeft: Radius.circular(25),
-                                      bottomRight: Radius.circular(25),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        items['questionEng'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Text(
-                                        items['questionTh'],
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                              Container(
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            minimumSize: Size(30, 30),
-                                            primary: Color(0xFF01579B),
-                                            onPrimary: Colors.white,
-                                            shape: CircleBorder(),
-                                            padding: EdgeInsets.all(0)),
-                                        onPressed: () {},
-                                        child: Icon(
-                                          Icons.volume_up_outlined,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            minimumSize: Size(30, 30),
-                                            primary: Color(0xFF01579B),
-                                            onPrimary: Colors.white,
-                                            shape: CircleBorder(),
-                                            padding: EdgeInsets.all(0)),
-                                        onPressed: () {},
-                                        child: Icon(
-                                          Icons.record_voice_over_outlined,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  if (items['type'] == 'user')
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              width: 80,
-                            ),
-                          ],
                         ),
-                        Container(
-                            width: 300,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                    width: 270,
-                                    margin: EdgeInsets.only(top: 15),
-                                    padding: EdgeInsets.all(15),
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xffE0E0E0),
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(25),
-                                        topRight: Radius.circular(5),
-                                        bottomLeft: Radius.circular(25),
-                                        bottomRight: Radius.circular(25),
-                                      ),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            child: Column(
-                                          children: [
-                                            Text(
-                                              items['questionEng'],
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            Text(
-                                              items['questionTh'],
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        )),
-                                      ],
-                                    )),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(30, 30),
-                                              primary: Color(0xFFE0E0E0),
-                                              onPrimary: Color(0xff01579B),
-                                              shape: CircleBorder(),
-                                              padding: EdgeInsets.all(0)),
-                                          onPressed: () {},
-                                          child: Icon(
-                                            Icons.volume_up_outlined,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(30, 30),
-                                              primary: Color(0xFFE0E0E0),
-                                              onPrimary: Color(0xff01579B),
-                                              shape: CircleBorder(),
-                                              padding: EdgeInsets.all(0)),
-                                          onPressed: () {},
-                                          child: Icon(
-                                            Icons.record_voice_over_outlined,
-                                            size: 20,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ))
                       ],
-                    )
-                ],
-              ),
-          ],
-        ),
+                    ))
+            ],
+          ),
       ],
     );
   }

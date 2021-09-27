@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ChangePassword extends StatelessWidget {
+class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
+  @override
+  _ChangePasswordState createState() => _ChangePasswordState();
+}
 
+class _ChangePasswordState extends State<ChangePassword> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -34,6 +38,9 @@ class ChangePassword extends StatelessWidget {
                             padding: EdgeInsets.only(top: 30, bottom: 10),
                             child: TextFormField(
                               //เช็คค่าว่าตรงกับค่าเก่าไหม
+                              autofocus: true,
+                              obscureText: true,
+                              keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value != '1234') {
                                   return 'Incorrect password';
@@ -52,6 +59,8 @@ class ChangePassword extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
+                              obscureText: true,
+                              keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 labelText: 'New password',
                                 border: OutlineInputBorder(
@@ -65,6 +74,8 @@ class ChangePassword extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             child: TextFormField(
+                              obscureText: true,
+                              keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value != '12345') {
                                   return 'Incorrect password';
