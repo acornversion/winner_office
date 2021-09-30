@@ -14,7 +14,6 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   var date;
 
   String getDate() {
-    print(widget.pickerType);
     if (date == null) {
       return '';
     } else {
@@ -42,7 +41,6 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           ),
         ),
       );
-
   Future pickDate(BuildContext context) async {
     final initialDate = DateTime.now();
     final newDate = await showDatePicker(
@@ -50,6 +48,23 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       initialDate: initialDate,
       firstDate: DateTime(DateTime.now().year - 5),
       lastDate: DateTime(DateTime.now().year + 10),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Color(0xffFFAB40), // header background color
+              onPrimary: Colors.black, // header text color
+              onSurface: Colors.black, // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: Color(0xffFFAB40), // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (newDate == null) {

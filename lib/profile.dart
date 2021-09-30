@@ -9,6 +9,7 @@ class Profile extends StatefulWidget {
 }
 
 @override
+bool _visible = false;
 List<dynamic> itemsList = [
   {
     'title': 'นักล่าดาว',
@@ -105,8 +106,8 @@ class _ProfileState extends State<Profile> {
                                         child: Text(
                                           'Pajaree Kittisupaluck',
                                           style: TextStyle(
-                                            fontSize: 18,
-                                          ),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                       Container(
@@ -284,7 +285,8 @@ class _ProfileState extends State<Profile> {
                             Container(
                               padding: EdgeInsets.only(left: 15),
                               child: Text('จำนวนดาวที่มีอยู่',
-                                  style: TextStyle(color: Colors.black)),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 16)),
                             ),
                             Row(
                               children: [
@@ -327,7 +329,8 @@ class _ProfileState extends State<Profile> {
                             padding: EdgeInsets.only(left: 10),
                             width: MediaQuery.of(context).size.width - 40,
                             child: Text('ความสำเร็จของฉัน',
-                                style: TextStyle(color: Colors.black)),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 16)),
                           ),
                           Container(
                               child: Row(
@@ -383,6 +386,8 @@ class _ProfileState extends State<Profile> {
                                                           child: Text(
                                                             items[
                                                                 'description'],
+                                                            style: TextStyle(
+                                                                fontSize: 12),
                                                           )),
                                                     ],
                                                   ),
@@ -458,7 +463,6 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.all(10),
                       margin: EdgeInsets.only(top: 15, bottom: 15),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -473,99 +477,60 @@ class _ProfileState extends State<Profile> {
                           ),
                         ],
                       ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                  child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    width:
-                                        MediaQuery.of(context).size.width - 40,
-                                    child: Text('บรอนซ์ลีก',
-                                        style: TextStyle(color: Colors.black)),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(left: 10),
-                                    width:
-                                        MediaQuery.of(context).size.width - 40,
-                                    child: Text('สิ้นสุดลีก : 4 วัน 16 ชม.',
-                                        style: TextStyle(color: Colors.black)),
-                                  )
-                                ],
-                              )),
-                            ],
-                          ),
-                          Container(
-                              child: Row(
-                            children: [
-                              Container(
+                      child: Column(children: [
+                        Row(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(left: 5, top: 10),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    for (var items in itemsRankingList)
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 15, right: 5),
-                                            child: Text('1'),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: 10, bottom: 10),
-                                            child: ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  minimumSize: Size(30, 30),
-                                                  primary: Color(0xFFE5E5E5),
-                                                  onPrimary: Colors.black,
-                                                  shape: CircleBorder(),
-                                                ),
-                                                onPressed: () {},
-                                                child: Text(
-                                                  '',
-                                                )),
-                                          ),
-                                          Container(
-                                            width: 290,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    child: Text(
-                                                  items['name'],
-                                                )),
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.star,
-                                                      color: Color(0xffFFAB40),
-                                                      size: 24,
-                                                    ),
-                                                    Text(
-                                                        items['star']
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black)),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
+                                      child: Text('บรอนซ์ลีก',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16)),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.only(left: 10),
+                                      width: MediaQuery.of(context).size.width -
+                                          40,
+                                      child: Text('สิ้นสุดลีก : 4 วัน 16 ชม.',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12)),
+                                    )
                                   ],
-                                ),
+                                )),
+                          ],
+                        ),
+                        Visibility(
+                          child: new Container(
+                              child: Column(
+                            children: [
+                              _visible
+                                  ? rankingList(
+                                      itemsRankingList.length, context)
+                                  : rankingList(5, context),
+                              TextButton(
+                                child: _visible
+                                    ? Text('ย่อกลับ',
+                                        style: TextStyle(color: Colors.black))
+                                    : Text('ดูทั้งหมด',
+                                        style: TextStyle(color: Colors.black)),
+                                onPressed: () {
+                                  setState(() {
+                                    _visible = !_visible;
+                                  });
+                                },
                               )
                             ],
                           )),
-                        ],
-                      ),
+                        ),
+                      ]),
                     )
                   ],
                 )),
@@ -574,4 +539,88 @@ class _ProfileState extends State<Profile> {
       ),
     ));
   }
+}
+
+Widget rankingList(value, context) {
+  return Column(
+    children: [
+      for (var i = 0; i < value; i++)
+        Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(right: 10, left: 10),
+              child: Row(
+                children: [
+                  Column(
+                    children: [
+                      if ((i + 1) < 4)
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Image.asset(
+                            'assets/images/ranking.png',
+                            width: 15,
+                            height: 15,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      if ((i + 1) > 3)
+                        Padding(
+                            padding: EdgeInsets.all(8.5),
+                            child: Text((i + 1).toString()))
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5, bottom: 5),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: Size(30, 30),
+                          primary: Color(0xFFE5E5E5),
+                          onPrimary: Colors.black,
+                          shape: CircleBorder(),
+                        ),
+                        onPressed: () {},
+                        child: Text(
+                          '',
+                        )),
+                  ),
+                  Container(
+                    width: 290,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                            child: Text(
+                          itemsRankingList[i]['name'].toString(),
+                        )),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star,
+                              color: Color(0xffFFAB40),
+                              size: 16,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text(
+                                  itemsRankingList[i]['star'].toString(),
+                                  style: TextStyle(color: Colors.black)),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Divider(
+                height: 0,
+              ),
+            ),
+          ],
+        ),
+    ],
+  );
 }

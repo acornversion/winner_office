@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Speaking extends StatefulWidget {
   const Speaking({Key? key}) : super(key: key);
@@ -369,8 +370,9 @@ class _SpeakingState extends State<Speaking> {
                                         shape: CircleBorder(),
                                         padding: EdgeInsets.all(0)),
                                     onPressed: () {},
-                                    child: Icon(
-                                      Icons.volume_up_outlined,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.volumeUp,
+                                      size: 20,
                                     ),
                                   ),
                                 ),
@@ -453,8 +455,9 @@ class _SpeakingState extends State<Speaking> {
                                       shape: CircleBorder(),
                                       padding: EdgeInsets.all(0)),
                                   onPressed: () {},
-                                  child: Icon(
-                                    Icons.volume_up_outlined,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.volumeUp,
+                                    size: 20,
                                   ),
                                 ),
                               ),

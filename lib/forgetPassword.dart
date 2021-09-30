@@ -73,6 +73,9 @@ class ForgetPassword extends StatelessWidget {
                     onPressed: () => showDialog<String>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
                             content: const Text(
                                 'A new password has been sent to your email.'),
                             actions: <Widget>[

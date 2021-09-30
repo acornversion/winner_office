@@ -3,13 +3,14 @@ import 'addCredit.dart';
 import 'contact.dart';
 import 'signUp.dart';
 import 'changePassword.dart';
+import 'main.dart';
 
 class Setting extends StatelessWidget {
   Setting({
     required this.title,
   });
   final String title;
-  List<dynamic> items = [
+  List<dynamic> menuList = [
     {
       'title': 'Personal Information',
       'image': 'vector1',
@@ -48,7 +49,7 @@ class Setting extends StatelessWidget {
                           'assets/images/logo.png',
                           width: 120,
                           height: 120,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       Positioned(
@@ -77,7 +78,7 @@ class Setting extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
-                        for (var item in items)
+                        for (var item in menuList)
                           Container(
                               child: Column(
                             children: [
@@ -117,6 +118,12 @@ class Setting extends StatelessWidget {
                                           MaterialPageRoute(
                                               builder: (context) => Contact(
                                                   title: 'Contact us')));
+                                    } else if (item['title'] == 'Logout') {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => MyApp()),
+                                          (Route<dynamic> route) => false);
                                     }
                                   },
                                   child: Container(

@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'dateWidget.dart';
+import 'notify.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({
@@ -143,6 +146,7 @@ class FormPage extends StatefulWidget {
     required this.title,
   });
   final String title;
+
   @override
   _FormPageState createState() => _FormPageState();
 }
@@ -154,6 +158,13 @@ class _FormPageState extends State<FormPage> {
       value == 'Male' ? selectedGender = value : selectedGender = value;
     });
   }
+
+  dynamic getBoolNumber = [];
+  dynamic getData = '';
+  String password = '';
+  bool isPwd = false;
+  bool isCheckNumber = false;
+  bool isCheckText = false;
 
   @override
   Widget build(BuildContext context) {
@@ -251,19 +262,125 @@ class _FormPageState extends State<FormPage> {
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         child: TextFormField(
+                          obscureText: isPwd ? false : true,
                           decoration: InputDecoration(
-                            labelText: 'Password',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                          ),
+                              labelText: 'Password',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              suffixIcon: (TextButton(
+                                style: TextButton.styleFrom(
+                                  minimumSize: Size(50, 45),
+                                  primary: Color(0xff909090),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    isPwd = !isPwd;
+                                  });
+                                },
+                                child: Icon(
+                                  password.length > 0
+                                      ? isPwd
+                                          ? Icons.visibility_outlined
+                                          : Icons.visibility_off_outlined
+                                      : null,
+                                ),
+                              ))),
+                          onChanged: (value) {
+                            setState(() {
+                              password = value;
+                              if (password.length > 0) {
+                                value.replaceAll(RegExp(r'[0-9]'), '').length >
+                                        0
+                                    ? isCheckText = true
+                                    : isCheckText = false;
+                                value
+                                            .replaceAll(RegExp(r'[a-zA-Z]'), '')
+                                            .length >
+                                        0
+                                    ? isCheckNumber = true
+                                    : isCheckNumber = false;
+                              }
+                            });
+                          },
                           initialValue: '',
                         ),
                       ),
                       Container(
+                          child: Column(
+                        children: [
+                          if (password.length > 0)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 10),
+                                      child: Icon(
+                                        password.length < 9
+                                            ? Icons.clear_outlined
+                                            : Icons.check_outlined,
+                                        color: password.length < 9
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
+                                    ),
+                                    Text('8-16 characters',
+                                        style: TextStyle(fontSize: 12)),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 10),
+                                      child: Icon(
+                                        !isCheckText
+                                            ? Icons.clear_outlined
+                                            : Icons.check_outlined,
+                                        color: !isCheckText
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
+                                    ),
+                                    Text(
+                                        'A lowercase or uppercase letter (a-z; A-Z)',
+                                        style: TextStyle(fontSize: 12)),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 10),
+                                      child: Icon(
+                                        !isCheckNumber
+                                            ? Icons.clear_outlined
+                                            : Icons.check_outlined,
+                                        color: !isCheckNumber
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
+                                    ),
+                                    Text('A number (0-9)',
+                                        style: TextStyle(fontSize: 12)),
+                                  ],
+                                ),
+                              ],
+                            )
+                        ],
+                      )),
+                      Container(
                         width: MediaQuery.of(context).size.width,
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         child: TextFormField(
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: 'Phone',
                             border: OutlineInputBorder(
@@ -287,7 +404,10 @@ class _FormPageState extends State<FormPage> {
                                     BorderRadius.all(Radius.circular(30)),
                               ),
                             ),
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () {
+                              dialogNotify(context,
+                                  'Your profile information updated successfully');
+                            },
                             child: Text(
                               'Sign up',
                             )),

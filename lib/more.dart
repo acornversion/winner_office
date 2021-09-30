@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'addCredit.dart';
 import 'menuSelectedItems.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ItemsPage extends StatelessWidget {
   ItemsPage({
@@ -62,7 +63,7 @@ class ItemsPage extends StatelessWidget {
                         child: Icon(
                           Icons.arrow_back,
                           color: Colors.black,
-                          size: 24.0,
+                          size: 24,
                         ),
                       ),
                     ],
@@ -139,6 +140,8 @@ class ItemsPage extends StatelessWidget {
 Widget widgetShowDialog(context) {
   return Container(
     child: AlertDialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20))),
       title: Text(
         'Unlock Lesson',
         textAlign: TextAlign.center,
@@ -417,6 +420,8 @@ Widget iconvoiceAndiconview(context, items) {
       child: Row(
         children: [
           Container(
+              width: 30,
+              height: 30,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
@@ -428,8 +433,8 @@ Widget iconvoiceAndiconview(context, items) {
               child: Container(
                   padding: EdgeInsets.all(3),
                   child: Center(
-                    child: Icon(
-                      Icons.settings_voice_outlined,
+                    child: FaIcon(
+                      FontAwesomeIcons.microphone,
                       color: Color(0xff90A4AE),
                       size: 20,
                     ),
@@ -477,10 +482,12 @@ Widget iconLock(items) {
                       Radius.circular(50)), // Set rounded corner radius
                 ),
                 child: Container(
+                    width: 30,
+                    height: 30,
                     padding: EdgeInsets.all(3),
                     child: Center(
-                        child: Icon(
-                      Icons.lock_outlined,
+                        child: FaIcon(
+                      FontAwesomeIcons.lock,
                       color: Color(0xff90A4AE),
                       size: 20,
                     ))))
@@ -496,10 +503,12 @@ Widget iconLock(items) {
                       Radius.circular(50)), // Set rounded corner radius
                 ),
                 child: Container(
+                    width: 30,
+                    height: 30,
                     padding: EdgeInsets.all(3),
                     child: Center(
-                        child: Icon(
-                      Icons.arrow_forward_outlined,
+                        child: FaIcon(
+                      FontAwesomeIcons.arrowRight,
                       color: Color(0xff01579B),
                       size: 20,
                     ))))

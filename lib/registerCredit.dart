@@ -1,8 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'dateWidget.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'notify.dart';
 
 class RegisterCard extends StatelessWidget {
   RegisterCard({
@@ -11,6 +10,8 @@ class RegisterCard extends StatelessWidget {
   final title;
   var maskFormatter = new MaskTextInputFormatter(
       mask: '#### #### #### ####', filter: {"#": RegExp(r'[0-9]')});
+  var code =
+      new MaskTextInputFormatter(mask: '###', filter: {"#": RegExp(r'[0-9]')});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -122,6 +123,7 @@ class RegisterCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       padding: EdgeInsets.only(top: 10, bottom: 10),
                       child: TextFormField(
+                        inputFormatters: [code],
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           suffixIcon: TextButton(
@@ -136,12 +138,22 @@ class RegisterCard extends StatelessWidget {
                             onPressed: () => showDialog<String>(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
                                 // title: const Text('Choose an account'),
-                                content: Image.asset(
-                                  'assets/images/credit.png',
-                                  fit: BoxFit.fill,
-                                ),
+
                                 actions: <Widget>[
+                                  Center(
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.only(top: 10, bottom: 10),
+                                      child: Image.asset(
+                                        'assets/images/credit.png',
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
                                   Container(
                                       child: Center(
                                     child: Container(
@@ -205,7 +217,10 @@ class RegisterCard extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(30)),
                             ),
                           ),
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () {
+                            dialogNotify(
+                                context, 'Bank account was successfully added');
+                          },
                           child: Text(
                             'Save',
                           )),

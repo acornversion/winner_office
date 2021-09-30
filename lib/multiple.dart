@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Multiple extends StatefulWidget {
   const Multiple({Key? key}) : super(key: key);
@@ -216,8 +215,9 @@ class _MultipleState extends State<Multiple> {
                                       shape: CircleBorder(),
                                       padding: EdgeInsets.all(0)),
                                   onPressed: () {},
-                                  child: Icon(
-                                    Icons.volume_up_outlined,
+                                  child: FaIcon(
+                                    FontAwesomeIcons.volumeUp,
+                                    size: 20,
                                   ),
                                 ),
                               ),
@@ -232,7 +232,6 @@ class _MultipleState extends State<Multiple> {
                                   onPressed: () {},
                                   child: Icon(
                                     Icons.record_voice_over_outlined,
-                                    size: 20,
                                   ),
                                 ),
                               )
@@ -322,8 +321,9 @@ class _MultipleState extends State<Multiple> {
                                       shape: CircleBorder(),
                                     ),
                                     onPressed: () {},
-                                    child: Icon(
-                                      Icons.volume_up_outlined,
+                                    child: FaIcon(
+                                      FontAwesomeIcons.volumeUp,
+                                      size: 20,
                                     ),
                                   ),
                                 )
@@ -386,7 +386,7 @@ class _MultipleState extends State<Multiple> {
                             : null,
                       ),
                       child: counterPage != 3
-                          ? Icon(Icons.volume_up_outlined,
+                          ? FaIcon(FontAwesomeIcons.volumeUp,
                               color: index + 1 == counter
                                   ? Colors.white
                                   : Color(0xff01579B))
@@ -557,13 +557,11 @@ class _MultipleState extends State<Multiple> {
                         }
 
                         counter = 0;
-                        correntanswer = 0;
+                        correntanswer = 1;
                         checkAnswer++;
-                        checkAnswer == 4 && counterPage == 2
-                            ? counterPage++
-                            : null;
+                        checkAnswer == 4 ? counterPage++ : null;
                       }
-                      print(checkAnswer);
+
                       if (counterPage == 2) {
                         chatList = [
                           {
@@ -591,8 +589,129 @@ class _MultipleState extends State<Multiple> {
                         // print(getBool);
                       }
                       if (counterPage == 3) {
-                        status = false;
                         answerList = ['Usually', 'Never', 'Sometime', 'Rarely'];
+                        counter == correntanswer
+                            ? status = true
+                            : status = false;
+                        status && checkAnswer != 6 ? checkAnswer++ : null;
+                        checkAnswer == 6
+                            ? showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20))),
+                                  title: Column(
+                                    children: [
+                                      Container(
+                                        child: Image.asset(
+                                          'assets/images/multiple.png',
+                                          width: 150,
+                                          height: 150,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            top: 20, bottom: 15),
+                                        child: ElevatedButton.icon(
+                                            icon: FaIcon(
+                                                FontAwesomeIcons.facebookF),
+                                            style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.all(0),
+                                              minimumSize: Size(270, 45),
+                                              primary: Color(0xFF5578B2),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(30)),
+                                              ),
+                                            ),
+                                            onPressed: () {},
+                                            label: Container(
+                                              width: 210,
+                                              child: Text('Share on Facebook'),
+                                            )),
+                                      ),
+                                      Container(
+                                        child: ElevatedButton.icon(
+                                            icon: FaIcon(
+                                                FontAwesomeIcons.twitterSquare),
+                                            style: ElevatedButton.styleFrom(
+                                              padding: EdgeInsets.all(0),
+                                              minimumSize: Size(270, 45),
+                                              primary: Color(0xFF51CBF2),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(30)),
+                                              ),
+                                            ),
+                                            onPressed: () {},
+                                            label: Container(
+                                              width: 210,
+                                              child: Text('Share on Twitter'),
+                                            )),
+                                      )
+                                    ],
+                                  ),
+                                  actions: <Widget>[
+                                    Container(
+                                        padding: EdgeInsets.only(
+                                            right: 10, left: 10, bottom: 25),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                minimumSize: Size(70, 70),
+                                                primary: Color(0xFFFFAB40),
+                                                onPrimary: Colors.black,
+                                                shape: CircleBorder(),
+                                              ),
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'home'),
+                                              child: Icon(
+                                                Icons.other_houses_outlined,
+                                                color: Colors.white,
+                                                size: 40,
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                minimumSize: Size(70, 70),
+                                                primary: Color(0xFFFFAB40),
+                                                onPrimary: Colors.black,
+                                                shape: CircleBorder(),
+                                              ),
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'refresh'),
+                                              child: Icon(
+                                                Icons.refresh_outlined,
+                                                color: Colors.white,
+                                                size: 40,
+                                              ),
+                                            ),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                minimumSize: Size(70, 70),
+                                                primary: Color(0xFFFFAB40),
+                                                onPrimary: Colors.black,
+                                                shape: CircleBorder(),
+                                              ),
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'back'),
+                                              child: Icon(
+                                                Icons.arrow_forward_outlined,
+                                                color: Colors.white,
+                                                size: 40,
+                                              ),
+                                            ),
+                                          ],
+                                        ))
+                                  ],
+                                ),
+                              )
+                            : null;
                       }
                     });
                   },
@@ -608,3 +727,7 @@ class _MultipleState extends State<Multiple> {
 Widget multipleAnswerSound(index) {
   return Container(child: Text('3'));
 }
+
+// Widget dialog(){
+//   return 
+// }

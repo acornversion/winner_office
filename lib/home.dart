@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:ffi';
-import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'more.dart';
@@ -20,56 +16,36 @@ List horizontalList = [
   {'4'},
   {'5'},
 ];
-List beginner = [
-  'beginner1',
-  'beginner2',
-];
-List intermediate = [
-  'intermediate1',
-  'intermediate2',
-];
 List<dynamic> verticalList = [
   {
     'titleTh': 'ระดับเริ่มต้น',
     'titleEng': 'Beginner',
     'index': '1',
     'image': ['beginner1.png', 'beginner2.png'],
-    'description1': [
-      'คุณชื่ออะไร',
-      'What’s your name?',
+    'description': [
+      {'th': 'คุณชื่ออะไร', 'eng': 'What’s your name?'},
+      {'th': 'คุณมาจากไหน', 'eng': 'Where are you from?'},
     ],
-    'description2': [
-      'คุณมาจากไหน',
-      'Where are you from?',
-    ]
   },
   {
     'titleTh': 'ระดับกลาง',
     'titleEng': 'Intermediate',
     'index': '2',
     'image': ['intermediate1.png', 'intermediate2.png'],
-    'description1': [
-      'วันธรรมดาที่สำนักงาน',
-      'A typical day at the office',
+    'description': [
+      {'th': 'วันธรรมดาที่สำนักงาน', 'eng': 'A typical day at the office'},
+      {'th': 'งานและบริษัท', 'eng': 'Describing jobs and companies'},
     ],
-    'description2': [
-      'งานและบริษัท',
-      'Describing jobs and companies',
-    ]
   },
   {
     'titleTh': 'ระดับสูง',
     'titleEng': 'Intermediate',
     'index': '3',
-    'image': ['intermediate1.png', 'intermediate2.png'],
-    'description1': [
-      'วันธรรมดาที่สำนักงาน',
-      'A typical day at the office',
+    'image': ['beginner2.png', 'intermediate1.png'],
+    'description': [
+      {'th': 'วันธรรมดาที่สำนักงาน', 'eng': 'A typical day at the office'},
+      {'th': 'งานและบริษัท', 'eng': 'Describing jobs and companies'},
     ],
-    'description2': [
-      'งานและบริษัท',
-      'Describing jobs and companies',
-    ]
   },
 ];
 
@@ -241,54 +217,97 @@ class _HomeState extends State<Home> {
                                   padding: EdgeInsets.only(
                                     top: 10,
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  child: Column(
                                     children: [
-                                      for (var xx in items['image'])
-                                        Column(
-                                          children: [
-                                            Container(
-                                              child: Image.asset(
-                                                'assets/images/' + xx,
-                                                width: 160,
-                                                height: 90,
-                                                fit: BoxFit.cover,
-                                              ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          for (var items1 in items['image'])
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  child: Image.asset(
+                                                    'assets/images/' + items1,
+                                                    width: 160,
+                                                    height: 90,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Padding(
-                                              padding: EdgeInsets.only(top: 10),
-                                              child: Column(
-                                                children: [
-                                                  for (var dd in items[
-                                                      'description' + '2'])
-                                                    Container(
-                                                      width: 160,
-                                                      child: Text(
-                                                        dd,
-                                                        style: TextStyle(
-                                                          fontSize: 12,
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          for (var i = 0; i < 2; i++)
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 10),
+                                                  child: Column(
+                                                    children: [
+                                                      Container(
+                                                        width: 160,
+                                                        child: Text(
+                                                          items['description']
+                                                                  [i]['th']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                          ),
+                                                          textAlign:
+                                                              TextAlign.start,
                                                         ),
-                                                        textAlign:
-                                                            TextAlign.start,
                                                       ),
-                                                    ),
-                                                  // Container(
-                                                  //   width: 160,
-                                                  //   child: Text(
-                                                  //     items['descriptionEng1'],
-                                                  //     style: TextStyle(
-                                                  //       fontSize: 12,
-                                                  //     ),
-                                                  //     textAlign:
-                                                  //         TextAlign.start,
-                                                  //   ),
-                                                  // ),
-                                                ],
-                                              ),
+                                                      Container(
+                                                        width: 160,
+                                                        child: Text(
+                                                          items['description']
+                                                                  [i]['eng']
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              color: Color(
+                                                                  0xff646464)),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                        ),
+                                                      ),
+                                                      // for (var items2
+                                                      //     in items['description'])
+                                                      //   Container(
+                                                      //     width: 160,
+                                                      //     child: Text(
+                                                      //       items2['th'],
+                                                      //       style: TextStyle(
+                                                      //         fontSize: 12,
+                                                      //       ),
+                                                      //       textAlign:
+                                                      //           TextAlign.start,
+                                                      //     ),
+                                                      //   ),
+                                                      // Container(
+                                                      //   width: 160,
+                                                      //   child: Text(
+                                                      //     items['descriptionEng1'],
+                                                      //     style: TextStyle(
+                                                      //       fontSize: 12,
+                                                      //     ),
+                                                      //     textAlign:
+                                                      //         TextAlign.start,
+                                                      //   ),
+                                                      // ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
                                             )
-                                          ],
-                                        ),
+                                        ],
+                                      )
                                     ],
                                   )),
                             ],
